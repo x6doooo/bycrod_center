@@ -59,7 +59,6 @@ func Start() {
         apiRouter.GET("/realtime", api.TaskRealtime)
         //apiRouter.GET("/knn", api.TaskDataKnnAnalysis)
         //apiRouter.GET("/noname", api.TaskDataAnalysis_Noname_0)
-        //
         //apiRouter.GET("/knn-test", api.TaskDataFormatTest)
     }
     //apiAnaRouter := engine.Group("/api/ana")

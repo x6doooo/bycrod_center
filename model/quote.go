@@ -6,14 +6,14 @@ import (
 )
 
 type QuoteItem struct {
-    Id                     bson.ObjectId `bson:"_id,omitempty",json:"omitempty"`
-    Ts                     uint64 `json:"ts"`
-    Date                   string `json:"date"`
-    Volume                 uint64 `json:"volume"`
-    High                   float64 `json:"high"`
-    Low                    float64 `json:"low"`
-    Open                   float64 `json:"open"`
-    Close                  float64 `json:"close"`
+    Id                     bson.ObjectId `bson:"_id,omitempty"`
+    Ts                     int64
+    Date                   string
+    Volume                 uint64
+    High                   float64
+    Low                    float64
+    Open                   float64
+    Close                  float64
     //Close_chg              float64
     //
     //                               // moving average
