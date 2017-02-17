@@ -12,11 +12,11 @@ func GetCodes() (codes []string, err error) {
     //return
     err = mongo.DB.C("summaries").Find(bson.M{
         "volume": bson.M{
-            "$gt": 50 * 10000,
+            "$gt": 100 * 10000,
         },
         "current": bson.M{
-            "$lte": 8, //50
-            "$gte": 5, //3
+            "$lte": 50,
+            "$gte": 3,
         },
         //"instOwn": bson.M{
         //    "$lt": 50,
