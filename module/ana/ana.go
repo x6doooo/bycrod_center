@@ -2,7 +2,7 @@ package ana
 
 import (
     "gopkg.in/mgo.v2/bson"
-    "bycrodata_grab/module/mongo"
+    "bycrod_center/module/mongo"
     //"github.com/d4l3k/talib"
 )
 

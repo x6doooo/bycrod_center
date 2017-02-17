@@ -1,7 +1,7 @@
 package mongo
 
 import (
-    "bycrodata_grab/conf"
+    "bycrod_center/conf"
     "gopkg.in/mgo.v2"
     "time"
 )

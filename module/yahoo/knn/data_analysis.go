@@ -1,17 +1,17 @@
 package knn
 
 //import (
-//    "bycrodata_grab/module/mongo"
+//    "bycrod_center/module/mongo"
 //    "strings"
 //    "runtime"
 //    "sync"
 //    "gopkg.in/mgo.v2/bson"
-//    "bycrodata_grab/model"
+//    "bycrod_center/model"
 //    "math"
 //    "sort"
 //    "time"
 //    //"fmt"
-//    "bycrodata_grab/module/util"
+//    "bycrod_center/module/util"
 //)
 //
 //const (

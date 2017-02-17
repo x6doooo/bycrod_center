@@ -1,10 +1,10 @@
 package yahoo
 
 import (
-    "bycrodata_grab/module/mongo"
+    "bycrod_center/module/mongo"
     "gopkg.in/mgo.v2/bson"
     //"strings"
-    //"bycrodata_grab/module/util"
+    //"bycrod_center/module/util"
 )
 
 func GetCodes() (codes []string, err error) {

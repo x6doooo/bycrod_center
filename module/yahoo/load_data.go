@@ -2,16 +2,16 @@ package yahoo
 
 import (
     "time"
-    "bycrodata_grab/module/util"
-    "bycrodata_grab/conf"
-    "bycrodata_grab/model"
+    "bycrod_center/module/util"
+    "bycrod_center/conf"
+    "bycrod_center/model"
     "net/http"
     "io"
     "compress/gzip"
     "io/ioutil"
     "encoding/json"
     "errors"
-    "bycrodata_grab/module/mongo"
+    "bycrod_center/module/mongo"
     "gopkg.in/mgo.v2/bson"
 )
 

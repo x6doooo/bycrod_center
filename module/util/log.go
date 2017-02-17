@@ -1,7 +1,7 @@
 package util
 
 import (
-    "bycrodata_grab/conf"
+    "bycrod_center/conf"
     "github.com/x6doooo/smog"
 )
 

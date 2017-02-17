@@ -5,9 +5,9 @@ import (
     "github.com/gin-gonic/gin"
     "github.com/x6doooo/err_handler"
     "net/http"
-    "bycrodata_grab/module/util"
-    "bycrodata_grab/conf"
-    "bycrodata_grab/controller/api"
+    "bycrod_center/module/util"
+    "bycrod_center/conf"
+    "bycrod_center/controller/api"
 )
 
 

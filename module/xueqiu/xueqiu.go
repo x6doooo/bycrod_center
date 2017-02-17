@@ -1,11 +1,11 @@
 package xueqiu
 
 import (
-    "bycrodata_grab/conf"
+    "bycrod_center/conf"
     "github.com/x6doooo/xueqiu_api"
     "strings"
-    "bycrodata_grab/module/mongo"
-    "bycrodata_grab/module/util"
+    "bycrod_center/module/mongo"
+    "bycrod_center/module/util"
 )
 
 func InitStockList() {

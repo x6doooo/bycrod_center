@@ -2,15 +2,15 @@ package api
 
 import (
     "github.com/gin-gonic/gin"
-    "bycrodata_grab/module/xueqiu"
-    "bycrodata_grab/module/yahoo"
+    "bycrod_center/module/xueqiu"
+    "bycrod_center/module/yahoo"
     "net/http"
-    //"bycrodata_grab/module/yahoo/knn"
-    //"bycrodata_grab/module/yahoo/noname_0"
-    "bycrodata_grab/module/mongo"
+    //"bycrod_center/module/yahoo/knn"
+    //"bycrod_center/module/yahoo/noname_0"
+    "bycrod_center/module/mongo"
     "strings"
     "time"
-    "bycrodata_grab/module/util"
+    "bycrod_center/module/util"
 )
 
 //case "init":

@@ -1,14 +1,14 @@
 package main
 
 import (
-    //"bycrodata_grab/module/xueqiu"
+    //"bycrod_center/module/xueqiu"
     //"fmt"
     //"os"
-    //"bycrodata_grab/module/yahoo"
-    //"bycrodata_grab/module/yahoo/knn"
-    //"bycrodata_grab/module/realtime"
+    //"bycrod_center/module/yahoo"
+    //"bycrod_center/module/yahoo/knn"
+    //"bycrod_center/module/realtime"
 )
-import "bycrodata_grab/server"
+import "bycrod_center/server"
 
 func main() {
     //method := os.Args[2]

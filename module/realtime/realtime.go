@@ -3,11 +3,11 @@ package realtime
 import (
     "time"
     "fmt"
-    "bycrodata_grab/module/mongo"
-    "bycrodata_grab/module/yahoo"
+    "bycrod_center/module/mongo"
+    "bycrod_center/module/yahoo"
     "errors"
     "gopkg.in/mgo.v2/bson"
-    "bycrodata_grab/model"
+    "bycrod_center/model"
 )
 
 func Do() {

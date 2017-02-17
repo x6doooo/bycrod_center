@@ -2,10 +2,10 @@ package api
 
 import (
     "github.com/gin-gonic/gin"
-    "bycrodata_grab/module/ana"
+    "bycrod_center/module/ana"
     "net/http"
     "github.com/d4l3k/talib"
-    //"bycrodata_grab/module/util"
+    //"bycrod_center/module/util"
 )
 
 func AnaBBands(ctx *gin.Context) {
