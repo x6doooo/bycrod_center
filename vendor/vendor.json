@@ -69,10 +69,13 @@
 			"revisionTime": "2016-10-28T12:58:03Z"
 		},
 		{
-			"checksumSHA1": "gTPfFlh+dwEUvQmZ75D1Gv9HFD8=",
 			"path": "github.com/x6doooo/xueqiu_api",
-			"revision": "ad687022e760399aff7ae2eee4ce53190bc4f4dd",
-			"revisionTime": "2017-01-10T01:24:41Z"
+			"revision": "",
+			"revisionTime": ""
+		},
+		{
+			"path": "github.com/x6doooo/xueqiu_api/model",
+			"revision": "",
 		},
 		{
 			"path": "golang.org/x/net/context",
