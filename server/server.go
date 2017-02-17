@@ -54,6 +54,7 @@ func Start() {
     apiRouter := engine.Group("/api/task")
     {
         apiRouter.GET("/xq-init", api.TaskXueqiuInit)
+        apiRouter.GET("/xq-events", api.TaskGetXqEvents)
         apiRouter.GET("/format", api.TaskFormat)
         apiRouter.GET("/clean", api.TaskClean)
         apiRouter.GET("/realtime", api.TaskRealtime)

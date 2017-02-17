@@ -74,6 +74,20 @@ func TaskRealtime(ctx *gin.Context) {
     })
 }
 
+func TaskGetXqEvents(ctx *gin.Context) {
+    err := xueqiu.GetEvents();
+    if err != nil {
+        ctx.JSON(http.StatusOK, gin.H{
+            "code": 1,
+            "data": err.Error(),
+        })
+    } else {
+        ctx.JSON(http.StatusOK, gin.H{
+            "code": 0,
+        })
+    }
+}
+
 //func TaskDataKnnAnalysis(ctx *gin.Context) {
 //    t := ctx.Query("type")
 //    knn.DataAnalysis("", 0, t)

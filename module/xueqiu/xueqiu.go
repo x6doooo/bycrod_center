@@ -6,6 +6,7 @@ import (
     "strings"
     "bycrod_center/module/mongo"
     "bycrod_center/module/util"
+    "bycrod_center/module/yahoo"
 )
 
 func InitStockList() {
@@ -32,4 +33,37 @@ func InitStockList() {
         details := controller.GetDetail(strings.Join(codes, ","))
         mongo.DB.C("summaries").Insert(details...)
     }
+}
+
+func GetEvents() error {
+
+    mongo.DB.C("events").DropCollection()
+
+    controller := xueqiu_api.New(conf.MainConf.Xueqiu.Username, conf.MainConf.Xueqiu.Password)
+    controller.Login()
+
+    codes, err := yahoo.GetCodes()
+    if err != nil {
+        return err
+    }
+    for _, code := range codes {
+
+        events := []interface{}{}
+
+        eventSet := controller.GetEvents(code)
+        if len(eventSet) == 0 {
+            continue
+        }
+        for d, e := range eventSet {
+            item := map[string]interface{}{
+                "code": code,
+                "date": d,
+                "events": e,
+            }
+            events = append(events, item)
+        }
+        mongo.DB.C("events").Insert(events...)
+    }
+
+    return nil
 }
