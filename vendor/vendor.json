@@ -9,12 +9,6 @@
 			"revisionTime": "2016-07-17T15:07:09Z"
 		},
 		{
-			"checksumSHA1": "yf7sXgjXLH7kZgFVNh5k2AS5fiw=",
-			"path": "github.com/d4l3k/talib",
-			"revision": "7775b9da1da7c78030e9939ff9cee7b8d3c55223",
-			"revisionTime": "2015-11-17T05:39:56Z"
-		},
-		{
 			"checksumSHA1": "RsNwOto8G8aXIiRrlFn4dtU9q/g=",
 			"path": "github.com/gin-gonic/gin",
 			"revision": "e2212d40c62a98b388a5eb48ecbdcf88534688ba",

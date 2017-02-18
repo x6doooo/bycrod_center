@@ -53,19 +53,18 @@ func Start() {
     // http://123.56.128.80:50090/api/task/daily-format
     apiRouter := engine.Group("/api/task")
     {
+        // 获取最新的雪球美股列表
         apiRouter.GET("/xq-init", api.TaskXueqiuInit)
+        // 获取最新的雪球美股事件
         apiRouter.GET("/xq-events", api.TaskGetXqEvents)
+        // 获取yahoo美股数据
+        // eg: /format?type=daily
         apiRouter.GET("/format", api.TaskFormat)
+        // 清空美股数据
         apiRouter.GET("/clean", api.TaskClean)
+        // todo: 获取实时数据
         apiRouter.GET("/realtime", api.TaskRealtime)
-        //apiRouter.GET("/knn", api.TaskDataKnnAnalysis)
-        //apiRouter.GET("/noname", api.TaskDataAnalysis_Noname_0)
-        //apiRouter.GET("/knn-test", api.TaskDataFormatTest)
     }
-    //apiAnaRouter := engine.Group("/api/ana")
-    //{
-    //    apiAnaRouter.GET("/bbands", api.AnaBBands)
-    //}
 
     util.Logger.Info("server start! %s", conf.MainConf.Server.Addr)
     engine.Run(conf.MainConf.Server.Addr)

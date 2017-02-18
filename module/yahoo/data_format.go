@@ -153,9 +153,6 @@ func loop(codes []string, startTime time.Time, dataType string) (fails []string)
                 util.Logger.Info(" - fetch: %s", timeUsedOfFetch.Sub(startTimeOfCurrentCode).String())
                 util.Logger.Info(" - compute: %s", timeUsedOfCompute.Sub(timeUsedOfFetch).String())
                 util.Logger.Info(" - insert: %s", timeUsedOfInsert.Sub(timeUsedOfCompute).String())
-                //fmt.Println(" - fetch:", timeUsedOfFetch.Sub(startTimeOfCurrentCode).String())
-                //fmt.Println(" - compute:", timeUsedOfCompute.Sub(timeUsedOfFetch).String())
-                //fmt.Println(" - insert:", timeUsedOfInsert.Sub(timeUsedOfCompute).String())
             }
 
         }(codesOfStep)
@@ -211,189 +208,10 @@ func InitBaseValue(idx int, ts int64, quotes model.QuoteData) (item model.QuoteI
     return
 }
 
-//func InitSimpleMovingAverage(sum_set map[string]float64, item *model.QuoteItem, list []model.QuoteItem) (isValid bool) {
-//
-//    currentSize := len(list)
-//    var theLastOne model.QuoteItem
-//
-//    // init the last record
-//    if currentSize > 0 {
-//        theLastOne = list[currentSize - 1]
-//        item.Close_chg = (item.Close - theLastOne.Close) / theLastOne.Close
-//    }
-//
-//    keys := []int{3, 5, 6, 10, 20}
-//    keysStr := []string{"3", "5", "6", "10", "20"}
-//    for idx, kStr := range keysStr {
-//        if _, ok := sum_set[kStr]; !ok {
-//            sum_set[kStr] = 0
-//        }
-//
-//        sum_set[kStr] += item.Close
-//
-//        kNum := keys[idx]
-//        if currentSize >= kNum {
-//            maKey := "Ma_" + kStr
-//            item.SetFloat64ByFieldName(maKey, sum_set[kStr] / float64(kNum))
-//            sum_set[kStr] -= list[currentSize - kNum].Close
-//            if currentSize > kNum {
-//                v_item, _ := item.GetFloat64ByFieldName(maKey)
-//                v_last, _ := theLastOne.GetFloat64ByFieldName(maKey)
-//                v_pct := (v_item - v_last) / v_last
-//                item.SetFloat64ByFieldName(maKey + "_chg_pct", v_pct)
-//            }
-//        }
-//    }
-//
-//    if _, ok := sum_set["diff_20"]; !ok {
-//        sum_set["diff_20"] = 0
-//    }
-//    if currentSize >= 20 {
-//        item.DiffSquare = math.Pow(item.Close - item.Ma_20, 2)
-//        sum_set["diff_20"] += item.DiffSquare
-//    }
-//
-//    if currentSize >= 40 {
-//        md := math.Sqrt(sum_set["diff_20"] / 20)
-//        sum_set["diff_20"] -= list[currentSize - 20].DiffSquare
-//        item.Boll_up_20 = item.Ma_20 + 2 * md
-//        item.Boll_dn_20 = item.Ma_20 - 2 * md
-//        item.Boll_pct_b = (item.Close - item.Boll_dn_20) / (item.Boll_up_20 - item.Boll_dn_20)
-//        item.Boll_bandwidth = (item.Boll_up_20 - item.Boll_dn_20) / item.Ma_20
-//        if currentSize > 40 {
-//            // 所有指标都有的数据为可用数据
-//            isValid = true
-//            item.Boll_up_20_chg_pct = (item.Boll_up_20 - theLastOne.Boll_up_20) / theLastOne.Boll_up_20
-//            item.Boll_dn_20_chg_pct = (item.Boll_dn_20 - theLastOne.Boll_dn_20) / theLastOne.Boll_dn_20
-//            item.Boll_pct_b_chg_pct = (item.Boll_pct_b - theLastOne.Boll_pct_b) / theLastOne.Boll_pct_b
-//            item.Boll_bandwidth_chg_pct = (item.Boll_bandwidth - theLastOne.Boll_bandwidth) / theLastOne.Boll_bandwidth
-//        }
-//    }
-//
-//    return
-//
-//}
-//
-//func InitExponentialMovingAverage(item *model.QuoteItem, list []model.QuoteItem) (isValid bool) {
-//    if len(list) == 0 {
-//        item.Ema_close_12 = item.Close
-//        item.Ema_close_26 = item.Close
-//        item.Macd_dem = 0
-//        item.Tr = item.High - item.Low
-//        return
-//    }
-//
-//    theLastOne := list[len(list) - 1]
-//
-//
-//    // macd
-//    var k12 float64 = 2.0 / (12.0 + 1.0)
-//    item.Ema_close_12 = (item.Close * k12) + theLastOne.Ema_close_12 * (1 - k12)
-//
-//    var k26 float64 = 2.0 / (26.0 + 1.0)
-//    item.Ema_close_26 = (item.Close * k26) + theLastOne.Ema_close_26 * (1 - k26)
-//
-//    var k9 float64 = 2.0 / (9.0 + 1.0)
-//    ema_diff := item.Ema_close_12 - item.Ema_close_26
-//    item.Macd_dem = (ema_diff * k9) + theLastOne.Macd_dem * (1 - k9)
-//
-//    item.Macd_osc = ema_diff - item.Macd_dem
-//
-//    // Atr
-//    var k14 float64 = 2.0 / (14.0 + 1.0)
-//    item.Tr = math.Max(item.High, theLastOne.Close) - math.Min(item.Low, theLastOne.Close)
-//    item.Atr_14 = (item.Tr * k14) + theLastOne.Atr_14 * (1 - k14)
-//    if theLastOne.Atr_14 != 0 {
-//        item.Atr_14_chg = (item.Atr_14 - theLastOne.Atr_14) / theLastOne.Atr_14
-//    }
-//
-//
-//    // 达到真正数目之前的值都是不准确的
-//    if len(list) < 26 {
-//        return
-//    }
-//
-//
-//    isValid = true
-//    return
-//}
-//
-//func InitRsi(item *model.QuoteItem, list []model.QuoteItem) (isValid bool) {
-//    if len(list) == 0 {
-//        item.Ema_D_14 = 0
-//        item.Ema_U_14 = 0
-//        return
-//    }
-//    theLastOne := list[len(list) - 1]
-//
-//    var U float64 = 0.0
-//    var D float64 = 0.0
-//    diff := item.Close - theLastOne.Close
-//    if diff > 0 {
-//        U = diff
-//    } else {
-//        D = -diff
-//    }
-//
-//    var k float64 = 2.0 / (14.0 + 1.0)
-//    item.Ema_U_14 = U * k + theLastOne.Ema_U_14 * (1 - k)
-//    item.Ema_D_14 = D * k + theLastOne.Ema_D_14 * (1 - k)
-//
-//    rs := item.Ema_U_14 / item.Ema_D_14
-//    item.Rsi = 1 - 1 / (1 + rs)
-//
-//    isValid = true
-//    return
-//}
-//
-//func InitBias(item *model.QuoteItem) (isValid bool) {
-//    v1 := false
-//    v2 := false
-//    if item.Ma_3 != 0 && item.Ma_6 != 0 {
-//        item.Bias_6 = (item.Close - item.Ma_3) / item.Ma_3
-//        item.Bias_3_6 = (item.Ma_3 - item.Ma_6) / item.Ma_6
-//        v1 = true
-//    }
-//    if item.Ma_10 != 0 && item.Ma_20 != 0 {
-//        item.Bias_20 = (item.Close - item.Ma_20) / item.Ma_20
-//        item.Bias_10_20 = (item.Ma_10 - item.Ma_20) / item.Ma_20
-//        v2 = true
-//    }
-//    isValid = v1 && v2
-//    return
-//}
-//
-//func InitRsv(item *model.QuoteItem, list []model.QuoteItem) (isValid bool) {
-//    listSize := len(list)
-//    if listSize >= 9 {
-//        dataSet := list[listSize - 9 : listSize]
-//        sort.Sort(ByHigh(dataSet))
-//        maxOfHeight := dataSet[8].High
-//        sort.Sort(ByLow(dataSet))
-//        minOfLow := dataSet[0].Low
-//
-//        if (maxOfHeight - minOfLow != 0) {
-//            item.Rsv_9 = (item.Close - minOfLow) / (maxOfHeight - minOfLow)
-//
-//            theLastOne := list[listSize - 1]
-//
-//            alfa :=  1.0 / 3.0
-//            item.Rsv_K_9 = alfa * item.Rsv_9 + (1 - alfa) * theLastOne.Rsv_K_9
-//            item.Rsv_D_9 = alfa * item.Rsv_K_9 + (1 - alfa) * theLastOne.Rsv_D_9
-//
-//            isValid = true
-//
-//        }
-//    }
-//    return
-//}
-//
-
 func handle(respData model.RespResult, theLastTs int64) (listInterface []interface{}, err error) {
 
     resultArr := respData.Chart.Result
     if len(resultArr) == 0 {
-        //fmt.Println(respData)
         err = errors.New("results is empty")
         return
     }
@@ -403,7 +221,6 @@ func handle(respData model.RespResult, theLastTs int64) (listInterface []interfa
     quotes := result.Indicators["quote"][0]
 
     // init
-    //sum_set := map[string]float64{}
     list := make([]model.QuoteItem, 0, len(timestamps))
     for idx, ts := range timestamps {
 
@@ -415,31 +232,7 @@ func handle(respData model.RespResult, theLastTs int64) (listInterface []interfa
             continue
         }
 
-        //// ratio计算
-        //validMap := map[string]bool{}
-        //validMap["sma"] = InitSimpleMovingAverage(sum_set, &item, list)
-        //validMap["ema"] = InitExponentialMovingAverage(&item, list)
-        //validMap["rsi"] = InitRsi(&item, list)
-        //validMap["rsv"] = InitRsv(&item, list)
-        //
-        //if validMap["sma"] {
-        //    validMap["bias"] = InitBias(&item)
-        //}
-
-
         list = append(list, item)
-
-
-        //isValid := true
-        //for _, v := range validMap {
-        //    if !v {
-        //        isValid = false
-        //    }
-        //}
-        //
-        //if !isValid {
-        //    continue
-        //}
 
         listInterface = append(listInterface, item)
 
